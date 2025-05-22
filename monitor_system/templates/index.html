@@ -11,7 +11,7 @@
 <body class="bg-gray-100">
     <div class="container mx-auto mt-8 p-6 bg-white rounded-lg shadow-lg">
         <div class="border border-gray-300 p-4 rounded mb-4">
-            <h1 class="text-3xl font-bold mb-2 text-center text-blue-600">ระบบ มอนิเตอร์การโจมตีทางไซเบอร์</h1>
+            <h1 class="text-3xl font-bold mb-2 text-center text-blue-600">ระบบมอนิเตอร์การโจมตีทางไซเบอร์</h1>
             <h2 class="text-xl font-semibold mb-4 text-center">Cyber Attack Monitoring System</h2>
         </div>
         <form method="GET" class="mb-4">
@@ -40,7 +40,7 @@
                         <input type="checkbox" name="attack_types" value="Denial of Service" {% if "Denial of Service"
                             in selected_types %}checked{% endif %}
                             class="form-checkbox h-5 w-5 text-blue-600 focus:ring-blue-500">
-                        <span class="ml-2 text-gray-700">Denial of Service (DoS)</span>
+                        <span class="ml-2 text-gray-700">Denial of Service</span>
                     </label>
                 </div>
             </div>
@@ -51,12 +51,14 @@
             <table class="min-w-full bg-white border border-gray-300 rounded-lg overflow-hidden shadow">
                 <thead class="bg-gray-200">
                     <tr>
-                        <th class="py-2 px-4 border-b border-gray-300 text-left text-gray-600">ID</th>
+                        <th class="py-2 px-4 border-b border-gray-300 text-left text-gray-600">Id</th>
                         <th class="py-2 px-4 border-b border-gray-300 text-left text-gray-600">ประเภทการโจมตี (Attack
                             Types)</th>
                         <th class="py-2 px-4 border-b border-gray-300 text-left text-gray-600">เวลา (Timestamp)</th>
                         <th class="py-2 px-4 border-b border-gray-300 text-left text-gray-600">สถานะ (Status)</th>
                         <th class="py-2 px-4 border-b border-gray-300 text-left text-gray-600">IP (Coming From)</th>
+                        <th class="py-2 px-4 border-b border-gray-300 text-left text-gray-600">เซิร์ฟเวอร์ (Server)</th>
+                        <!-- เพิ่มคอลัมน์เซิร์ฟเวอร์ -->
                     </tr>
                 </thead>
                 <tbody>
@@ -68,6 +70,7 @@
                         <td class="py-2 px-4 border-b border-gray-300">{{ alert.timestamp }}</td>
                         <td class="py-2 px-4 border-b border-gray-300">{{ alert.status }}</td>
                         <td class="py-2 px-4 border-b border-gray-300">{{ alert.ip }}</td>
+                        <td class="py-2 px-4 border-b border-gray-300">{{ alert.server }}</td> <!-- แสดงเซิร์ฟเวอร์ -->
                     </tr>
                     {% endfor %}
                 </tbody>
