@@ -41,30 +41,35 @@ def classification_model():
     model_info_list = [
         {
             "name": "Random Forest",
+            "tags": "Default Model",
             "accuracy": "95%",
             "description": "Detect anomalies",
             "data_source": "Dataset 1",
         },
         {
             "name": "CNN",
+            "tags": "Default Model",
             "accuracy": "90%",
             "description": "Pattern detection",
             "data_source": "Dataset 2",
         },
         {
             "name": "SVM",
+            "tags": "Default Model",
             "accuracy": "88%",
             "description": "Classify traffic",
             "data_source": "Dataset 3",
         },
         {
             "name": "KNN",
+            "tags": "Default Model",
             "accuracy": "85%",
             "description": "Simple classifier",
             "data_source": "Dataset 4",
         },
         {
             "name": "GradientBoost",
+            "tags": "Default Model",
             "accuracy": "82%",
             "description": "Boosted trees",
             "data_source": "Dataset 5",
