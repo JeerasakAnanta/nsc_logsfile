@@ -7,11 +7,15 @@ app = Flask(__name__)
 def index():
     alerts = get_alerts()
     selected_types = request.args.getlist('attack_types')
+    selected_servers = request.args.getlist('server_types')
 
+    # กรองการโจมตีตามประเภทและเซิร์ฟเวอร์ที่เลือก
     if selected_types:
         alerts = [alert for alert in alerts if alert['type'] in selected_types]
+    if selected_servers:
+        alerts = [alert for alert in alerts if alert['server'] in selected_servers]
 
-    return render_template('index.html', alerts=alerts, selected_types=selected_types)
+    return render_template('index.html', alerts=alerts, selected_types=selected_types, selected_servers=selected_servers)
 
 def get_alerts():
     # สร้างข้อมูลการโจมตีแบบสุ่มตามสัดส่วนที่กำหนด
@@ -42,7 +46,7 @@ def get_alerts():
             "timestamp": timestamp,
             "status": status,
             "ip": ip_address,
-            "server": server  # เพิ่มฟิลด์เซิร์ฟเวอร์
+            "server": server
         })
 
     return alerts
