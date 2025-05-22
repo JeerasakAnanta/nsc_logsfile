@@ -158,14 +158,27 @@ def use_model():
 
 @app.route("/training_data")
 def training_data():
-    return render_template("training_data.html", training_data_options=dataset_options)
+    # Dataset options
+    training_data_options = ["Dataset 1", "Dataset 2", "Dataset 3", "Dataset 4"]
+    return render_template(
+        "training_data.html", training_data_options=training_data_options
+    )
 
 
-# เส้นทางสำหรับการฝึกอบรมโมเดล
 @app.route("/train_model", methods=["POST"])
 def train_model():
-    selected_data = request.form.getlist("training_data")
-    return f"Training model with: {', '.join(selected_data)}"
+    tag = request.form.get("tag")
+    description = request.form.get("description")
+    dataset = request.form.get("dataset")
+    # สุ่ม Accuracy 85–95%
+    accuracy = random.randint(85, 95)
+    return render_template(
+        "model_selected.html",
+        tag=tag,
+        description=description,
+        dataset=dataset,
+        accuracy=accuracy,
+    )
 
 
 if __name__ == "__main__":

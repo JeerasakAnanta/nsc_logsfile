@@ -9,26 +9,87 @@
 </head>
 
 <body class="bg-gray-100">
-    <!-- นำเข้า navbar -->
     {% include 'navbar.html' %}
     <div class="container mx-auto mt-8 p-6 bg-white rounded-lg shadow-lg">
-        <h1 class="text-3xl font-bold mb-4 text-center text-blue-600">เลือกข้อมูลสำหรับฝึกอบรม</h1>
-        <form method="POST" action="/train_model">
-            <div class="flex flex-col">
-                {% for option in training_data_options %}
-                <label class="flex items-center mb-2">
-                    <input type="checkbox" name="training_data" value="{{ option }}"
-                        class="form-checkbox h-5 w-5 text-blue-600 focus:ring-blue-500">
-                    <span class="ml-2 text-gray-700">{{ option }}</span>
-                </label>
-                {% endfor %}
+        <h1 class="text-3xl font-bold mb-4 text-center text-blue-600">
+            เลือกข้อมูลสำหรับฝึกอบรม
+        </h1>
+        <form id="trainForm" method="POST" action="/train_model">
+            <!-- 1. Tags -->
+            <div class="mb-4">
+                <label class="block text-gray-700 font-medium mb-1">Tags:</label>
+                <div class="flex items-center">
+                    <select id="tagSelect" name="tag" class="border rounded p-2 mr-2">
+                        <option value="Default Model" selected>Default Model</option>
+                    </select>
+                    <button id="addTagBtn" type="button" class="bg-gray-200 px-3 py-1 rounded hover:bg-gray-300">
+                        + Tag ใหม่
+                    </button>
+                </div>
+                <input type="text" id="newTagInput" class="mt-2 border rounded p-2 w-full hidden"
+                    placeholder="พิมพ์ชื่อ Tag แล้วกด Enter" />
             </div>
+
+            <!-- 2. คำอธิบาย -->
+            <div class="mb-4">
+                <label for="description" class="block text-gray-700 font-medium mb-1">
+                    Input คำอธิบาย:
+                </label>
+                <textarea id="description" name="description"
+                    class="border rounded p-2 w-full h-24">Detect anomalies</textarea>
+            </div>
+
+            <!-- 3. Dataset -->
+            <div class="mb-4">
+                <label for="dataset" class="block text-gray-700 font-medium mb-1">
+                    Dataset:
+                </label>
+                <select id="dataset" name="dataset" class="border rounded p-2 w-full">
+                    <option value="" disabled selected>-- เลือก Dataset --</option>
+                    {% for ds in training_data_options %}
+                    <option value="{{ ds }}">{{ ds }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
             <button type="submit"
-                class="bg-blue-500 text-white rounded p-3 hover:bg-blue-600 transition duration-200 mt-4">ฝึกอบรมโมเดล</button>
+                class="bg-blue-500 text-white rounded p-3 hover:bg-blue-600 transition duration-200 mt-4">
+                ฝึกอบรมโมเดล
+            </button>
         </form>
     </div>
-    <!-- นำเข้า footer -->
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white p-6 rounded-lg flex items-center">
+            <svg class="animate-spin h-8 w-8 mr-4 text-blue-600" …>…</svg>
+            <span id="loadingText" class="text-gray-800 text-lg">
+                กำลังฝึกอบรม โปรดรอสักครู่...
+            </span>
+        </div>
+    </div>
+
     {% include 'footer.html' %}
+
+    <script>
+        const form = document.getElementById('trainForm');
+        const overlay = document.getElementById('loadingOverlay');
+        const txt = document.getElementById('loadingText');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            // สุ่มเวลารอ 5–10 วินาที
+            const waitSec = Math.floor(Math.random() * 5) + 5;
+            txt.textContent = `กำลังฝึกอบรม โปรดรอสักครู่... `;
+            overlay.classList.remove('hidden');
+            setTimeout(() => {
+                this.submit();
+                overlay.classList.add('hidden');
+            }, waitSec * 1000);
+        });
+    </script>
 </body>
+
+</html>
 
 </html>
