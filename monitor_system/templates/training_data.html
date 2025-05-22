@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เลือกข้อมูลสำหรับฝึกอบรม</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@1.9.6/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+    <!-- นำเข้า navbar -->
+    {% include 'navbar.html' %}
+    <div class="container mx-auto mt-8 p-6 bg-white rounded-lg shadow-lg">
+        <h1 class="text-3xl font-bold mb-4 text-center text-blue-600">เลือกข้อมูลสำหรับฝึกอบรม</h1>
+        <form method="POST" action="/train_model">
+            <div class="flex flex-col">
+                {% for option in training_data_options %}
+                <label class="flex items-center mb-2">
+                    <input type="checkbox" name="training_data" value="{{ option }}"
+                        class="form-checkbox h-5 w-5 text-blue-600 focus:ring-blue-500">
+                    <span class="ml-2 text-gray-700">{{ option }}</span>
+                </label>
+                {% endfor %}
+            </div>
+            <button type="submit"
+                class="bg-blue-500 text-white rounded p-3 hover:bg-blue-600 transition duration-200 mt-4">ฝึกอบรมโมเดล</button>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>โมเดลการจำแนกประเภท</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@1.9.6/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+    {% include 'navbar.html' %} <!-- นำเข้า navbar -->
+    <div class="container mx-auto mt-8 p-6 bg-white rounded-lg shadow-lg">
+        <h1 class="text-3xl font-bold mb-4 text-center text-blue-600">โมเดลการจำแนกประเภท</h1>
+        <h2 class="text-xl">ชื่อโมเดล: {{ model_info.name }}</h2>
+        <p class="mb-2">ความแม่นยำ: {{ model_info.accuracy }}</p>
+        <p>คำอธิบาย: {{ model_info.description }}</p>
+    </div>
+</body>
+
+</html>
