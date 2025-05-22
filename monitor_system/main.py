@@ -30,7 +30,8 @@ def server_status():
     server_data = {
         "Server A": "Online",
         "Server B": "Online",
-        "Server C": "Maintenance",  # ตัวอย่าง
+        "Server C": "Maintenance",  
+        "Server D": "Offline", 
     }
     return render_template("server_status.html", server_data=server_data)
 
