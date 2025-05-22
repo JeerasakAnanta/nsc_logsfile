@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>จัดการข้อมูลแจ้งเตือน</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@1.9.6/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+
+    {% include 'navbar.html' %}
+
+    <div class="container mx-auto mt-8 p-6 bg-white rounded-lg shadow-lg">
+        <h1 class="text-3xl font-bold text-center mb-6 text-blue-600">จัดการข้อมูลแจ้งเตือน</h1>
+
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white border border-gray-300 rounded-lg overflow-hidden shadow">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="py-2 px-4 text-left">ID</th>
+                        <th class="py-2 px-4 text-left">ประเภท</th>
+                        <th class="py-2 px-4 text-left">เวลา</th>
+                        <th class="py-2 px-4 text-left">สถานะ</th>
+                        <th class="py-2 px-4 text-left">IP</th>
+                        <th class="py-2 px-4 text-left">Server</th>
+                        <th class="py-2 px-4 text-left">Dataset</th>
+                        <th class="py-2 px-4 text-left">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for a in alerts %}
+                    <tr class="border-b">
+                        <td class="py-2 px-4">{{ a.id }}</td>
+                        <td class="py-2 px-4">{{ a.type }}</td>
+                        <td class="py-2 px-4">{{ a.timestamp }}</td>
+                        <td class="py-2 px-4">{{ a.status }}</td>
+                        <td class="py-2 px-4">{{ a.ip }}</td>
+                        <td class="py-2 px-4">{{ a.server }}</td>
+                        <td class="py-2 px-4">
+                            <form method="POST" action="{{ url_for('assign_dataset') }}" class="flex items-center">
+                                <input type="hidden" name="id" value="{{ a.id }}">
+                                <select name="dataset" class="border rounded p-1 text-sm mr-2">
+                                    <option value="">-- เลือก Dataset --</option>
+                                    {% for ds in dataset_options %}
+                                    <option value="{{ ds }}" {% if ds==a.dataset %}selected{% endif %}>{{ ds }}</option>
+                                    {% endfor %}
+                                </select>
+                                <button type="submit"
+                                    class="bg-green-500 text-white px-2 py-1 rounded text-sm hover:bg-green-600">
+                                    บันทึก
+                                </button>
+                            </form>
+                        </td>
+                        <td class="py-2 px-4">
+                            <form method="POST" action="{{ url_for('delete_alert') }}">
+                                <input type="hidden" name="id" value="{{ a.id }}">
+                                <button type="submit"
+                                    class="bg-red-500 text-white px-2 py-1 rounded text-sm hover:bg-red-600">
+                                    ลบ
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {% include 'footer.html' %}
+</body>
+
+</html>
