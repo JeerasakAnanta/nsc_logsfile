@@ -11,30 +11,51 @@
 <body class="bg-gray-100">
     <div class="container mx-auto mt-8 p-5 bg-white rounded shadow-md">
         <h1 class="text-2xl font-bold mb-4 text-center">ระบบมอนิเตอร์การโจมตีทางไซเบอร์</h1>
+        <h2 class="text-xl font-semibold mb-4 text-center">Cyber attack monitoring system</h2>
 
         <form method="GET" class="mb-4">
-            <input type="text" name="search" placeholder="ค้นหา IP ผู้โจมตี" value="{{ search_query }}"
-                class="border rounded p-2 mr-2" />
-
-            <select name="sort" class="border rounded p-2 ml-2">
-                <option value="id">ID</option>
-                <option value="type">ประเภทรายการ</option>
-                <option value="timestamp">เวลา</option>
-                <option value="status">สถานะ</option>
-                <option value="ip">IP</option>
-            </select>
-            <button type="submit" class="bg-blue-500 text-white rounded p-2">ค้นหา</button>
-
+            <div class="flex flex-col md:flex-row md:items-center mb-4">
+                <label class="mr-4">เเสดงประเภทการโจมตี:</label>
+                <div class="flex flex-wrap">
+                    <label class="flex items-center mr-4">
+                        <input type="checkbox" name="attack_types" value="Normal Traffic" {% if "Normal Traffic" in
+                            selected_types %}checked{% endif %}
+                            class="form-checkbox h-5 w-5 text-blue-600 focus:ring-blue-500">
+                        <span class="ml-2 text-gray-700">Normal Traffic</span>
+                    </label>
+                    <label class="flex items-center mr-4">
+                        <input type="checkbox" name="attack_types" value="SQL Injection" {% if "SQL Injection" in
+                            selected_types %}checked{% endif %}
+                            class="form-checkbox h-5 w-5 text-blue-600 focus:ring-blue-500">
+                        <span class="ml-2 text-gray-700">SQL Injection</span>
+                    </label>
+                    <label class="flex items-center mr-4">
+                        <input type="checkbox" name="attack_types" value="Path Traversal" {% if "Path Traversal" in
+                            selected_types %}checked{% endif %}
+                            class="form-checkbox h-5 w-5 text-blue-600 focus:ring-blue-500">
+                        <span class="ml-2 text-gray-700">Path Traversal</span>
+                    </label>
+                    <label class="flex items-center mr-4">
+                        <input type="checkbox" name="attack_types" value="Denial of Service" {% if "Denial of Service"
+                            in selected_types %}checked{% endif %}
+                            class="form-checkbox h-5 w-5 text-blue-600 focus:ring-blue-500">
+                        <span class="ml-2 text-gray-700">Denial of Service</span>
+                    </label>
+                </div>
+            </div>
+            <button type="submit"
+                class="bg-blue-500 text-white rounded p-2 hover:bg-blue-600 transition duration-200">ค้นหา</button>
         </form>
 
         <table class="min-w-full bg-white border border-gray-300 rounded-lg overflow-hidden">
             <thead class="bg-gray-200">
                 <tr>
-                    <th class="py-2 px-4 border-b border-gray-300 text-left text-gray-600">#</th>
-                    <th class="py-2 px-4 border-b border-gray-300 text-left text-gray-600">ประเภทรายการ</th>
-                    <th class="py-2 px-4 border-b border-gray-300 text-left text-gray-600">เวลา</th>
-                    <th class="py-2 px-4 border-b border-gray-300 text-left text-gray-600">สถานะ</th>
-                    <th class="py-2 px-4 border-b border-gray-300 text-left text-gray-600">IP</th>
+                    <th class="py-2 px-4 border-b border-gray-300 text-left text-gray-600">id</th>
+                    <th class="py-2 px-4 border-b border-gray-300 text-left text-gray-600">ประเภทการโจมตี (attack types)
+                    </th>
+                    <th class="py-2 px-4 border-b border-gray-300 text-left text-gray-600">เวลา (timestamp)</th>
+                    <th class="py-2 px-4 border-b border-gray-300 text-left text-gray-600">สถานะ (status)</th>
+                    <th class="py-2 px-4 border-b border-gray-300 text-left text-gray-600">IP (coming from)</th>
                 </tr>
             </thead>
             <tbody>
@@ -51,10 +72,12 @@
             </tbody>
         </table>
     </div>
+    <div>
+        <footer class="bg-gray-800 text-white text-center py-4 mt-8">
+            <p>ระบบมอนิเตอร์การโจมตีทางไซเบอร์ © 2025 NSC RMUTL NAN </p>
+        </footer>
+    </div>
 
-    <footer class="bg-gray-200 text-center p-2 mt-4">
-        <p class="text-sm">Copyright 2024 NSC RMUTL NAN </p>
-    </footer>
 </body>
 
 </html>
