@@ -17,7 +17,14 @@
             เลือกโมเดลที่ใช้ (Select a Model)
         </h1>
 
+
         <form id="modelForm" method="POST" action="{{ url_for('use_model') }}">
+            <div class="text-center mt-6">
+                <button id="submitBtn" type="submit"
+                    class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 transition">
+                    ใช้งานโมเดลนี้
+                </button>
+            </div>
             <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {% for m in model_info_list %}
                 <label
@@ -39,12 +46,7 @@
                 {% endfor %}
             </div>
 
-            <div class="text-center mt-6">
-                <button id="submitBtn" type="submit"
-                    class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 transition">
-                    ใช้งานโมเดลนี้
-                </button>
-            </div>
+
         </form>
     </div>
 
