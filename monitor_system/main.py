@@ -30,20 +30,55 @@ def server_status():
     server_data = {
         "Server A": "Online",
         "Server B": "Online",
-        "Server C": "Maintenance",  
-        "Server D": "Offline", 
+        "Server C": "Maintenance",
+        "Server D": "Offline",
     }
     return render_template("server_status.html", server_data=server_data)
 
 
-@app.route("/classification_model")
+@app.route("/classification_model", methods=["GET"])
 def classification_model():
-    model_info = {
-        "name": "Random Forest Classifier",
-        "accuracy": "95%",
-        "description": "Used for detecting anomalies and classifying traffic types in the server.",
-    }
-    return render_template("classification_model.html", model_info=model_info)
+    model_info_list = [
+        {
+            "name": "Random Forest",
+            "accuracy": "95%",
+            "description": "Detect anomalies",
+            "data_source": "Dataset 1",
+        },
+        {
+            "name": "CNN",
+            "accuracy": "90%",
+            "description": "Pattern detection",
+            "data_source": "Dataset 2",
+        },
+        {
+            "name": "SVM",
+            "accuracy": "88%",
+            "description": "Classify traffic",
+            "data_source": "Dataset 3",
+        },
+        {
+            "name": "KNN",
+            "accuracy": "85%",
+            "description": "Simple classifier",
+            "data_source": "Dataset 4",
+        },
+        {
+            "name": "GradientBoost",
+            "accuracy": "82%",
+            "description": "Boosted trees",
+            "data_source": "Dataset 5",
+        },
+    ]
+    return render_template("classification_model.html", model_info_list=model_info_list)
+
+
+@app.route("/use_model", methods=["POST"])
+def use_model():
+    selected = request.form.get("selected_model")
+    # (ถ้าต้องการ หน่วงฝั่งเซิร์ฟเวอร์อีกชั้น)
+    # time.sleep(random.randint(3,6))
+    return render_template("model_selected.html", model_name=selected)
 
 
 @app.route("/training_data")
