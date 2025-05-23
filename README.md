@@ -1,7 +1,53 @@
 # การตรวจจับเหตุการณ์ผิดปกติจากข้อมูลการจราจรทางคอมพิวเตอร์  (Anomaly Detection From Log Files)
 
 - โครงการสำหรับ การตรวจจับเหตุการณ์ผิดปกติจากข้อมูลการจราจรทางคอมพิวเตอร์ โดยใช้เทคนิคการเรียนรู้ของเครื่อง (Machine Learning) และการวิเคราะห์ข้อมูล (Data Analysis) เพื่อช่วยในการตรวจสอบและวิเคราะห์เหตุการณ์ที่เกิดขึ้นในระบบคอมพิวเตอร์  
-- 
+## การติดตั้ง 
+- install uv 
+```bash
+# On macOS and Linux.
+curl -LsSf https://astral.sh/uv/install.sh | sh 
+```
+```bash  
+# On Windows.
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+### System 1 (LogForwarder) 
+- create virtual environment 
+```bash
+uv venv  
+``` 
+- activate virtual environment 
+```
+source .venv/bin/activate
+```
+- install requirements 
+```bash
+uv sync
+```
+- run logforwarder 
+```bash
+uv run python logforwarder.py \
+  --log-file /var/log/apache2/access.log \
+  --endpoint http://localhost:5000/api/logs
+```
+## System 2 (Monitor System) 
+- create virtual environment 
+```bash
+uv venv  
+```
+- activate virtual environment 
+```
+source .venv/bin/activate
+```
+- install requirements 
+```bash
+uv sync
+```
+- run monitor system 
+```bash
+uv run main.py
+```
+
 ##  flow logs app 
 ![app flow](docs/logs_app_flow.png)
 

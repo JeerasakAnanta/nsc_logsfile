@@ -1,5 +1,5 @@
 ```bash
-uv run python log_forwarder.py \
+uv run python logforwarder.py \
   --log-file /var/log/apache2/access.log \
   --endpoint http://localhost:5000/api/logs
 ```
