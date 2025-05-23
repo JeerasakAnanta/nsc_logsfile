@@ -93,30 +93,35 @@ def classification_model():
     models = [
         {
             "name": "Random Forest",
+            "tags": "default mode",
             "accuracy": "95%",
             "description": "Detect anomalies",
             "data_source": "Dataset 1",
         },
         {
             "name": "CNN",
+            "tags": "default mode",
             "accuracy": "90%",
             "description": "Pattern detection",
             "data_source": "Dataset 2",
         },
         {
             "name": "SVM",
+            "tags": "default mode",
             "accuracy": "88%",
             "description": "Classify traffic",
             "data_source": "Dataset 3",
         },
         {
             "name": "KNN",
+            "tags": "default mode",
             "accuracy": "85%",
             "description": "Simple classifier",
             "data_source": "Dataset 4",
         },
         {
             "name": "GradientBoost",
+            "tags": "default mode",
             "accuracy": "82%",
             "description": "Boosted trees",
             "data_source": "Dataset 5",
